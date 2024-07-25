@@ -10,11 +10,13 @@ export class myElement extends DDDSuper(LitElement) {
   constructor() {
     super();
     this.title = "";
+    this.cool = false;
   }
 
   static get properties() {
     return {
       title: { type: String },
+      cool: { type: Boolean, reflect: true },
     };
   }
 
@@ -27,6 +29,10 @@ export class myElement extends DDDSuper(LitElement) {
         background-color: var(--ddd-theme-accent);
         font-family: var(--ddd-font-navigation);
         font-size: var(--my-element-font-size, var(--ddd-font-size-s));
+      }
+      :host([cool]) {
+        font-size: var(--my-element-font-size, var(--ddd-font-size-xl));
+        background-color: orange;
       }
       .wrapper {
         margin: var(--ddd-spacing-2);
@@ -43,6 +49,7 @@ export class myElement extends DDDSuper(LitElement) {
     return html`
 <div class="wrapper">
   <div>${this.title}</div>
+  <div>${this.cool ? html`<strong>Really cool</strong>` : ``}</div>
   <slot></slot>
 </div>`;
   }
